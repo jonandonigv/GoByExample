@@ -20,7 +20,15 @@ func main() {
 		base: base{num: 1},
 		str:  "the number is 1",
 	}
-	fmt.Println(c)
-	fmt.Println(base{num: 1}.describe())
-	fmt.Println(c.describe())
+
+	fmt.Printf("co={num: %v, str: %v}", c.num, c.str)
+	fmt.Println("also num:", c.base.num)
+	fmt.Println("descrive:", c.describe())
+
+	type describer interface {
+		describe() string
+	}
+
+	var d describer = c
+	fmt.Println("describer:", d.describe())
 }
