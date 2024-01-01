@@ -13,5 +13,26 @@ func newPerson(name string, age int) *Person {
 }
 
 func main() {
-	fmt.Println(Person{"Bob", 20})
+	fmt.Println(newPerson("Jon", 27))
+	fmt.Println(newPerson("Mikel", 24))
+	fmt.Println(newPerson("John", 22))
+	fmt.Println(&Person{name: "Sam", age: 22})
+
+	s := Person{name: "Sean", age: 50}
+	fmt.Println(s.name)
+
+	sp := &s
+	fmt.Println(sp.age)
+
+	sp.age = 51
+	fmt.Println(sp.age)
+
+	dog := struct {
+		name   string
+		isGood bool
+	}{
+		"Rex",
+		true,
+	}
+	fmt.Println(dog)
 }
