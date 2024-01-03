@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	// create a new ticker that ticks once every 500 Millisecond
 	ticker := time.NewTicker(500 * time.Millisecond)
 	done := make(chan bool)
 
