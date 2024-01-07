@@ -36,4 +36,16 @@ func main() {
 	t2.Execute(os.Stdout, map[string]string{
 		"Name": "Mickey Mouse",
 	})
+
+	t3 := Create("t3", "{{if . -}} yes {{else -}} no {{end}}\n")
+	t3.Execute(os.Stdout, "no empty")
+	t3.Execute(os.Stdout, "")
+
+	t4 := Create("t4", "Range: {{range .}}{{.}} {{end}}\n")
+	t4.Execute(os.Stdout, []string{
+		"Go",
+		"Rust",
+		"C++",
+		"C#",
+	})
 }
