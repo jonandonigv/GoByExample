@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
+	// Create a new template
 	t1 := template.New("t1")
+	// Parse t1 template
 	t1, err := t1.Parse("Value is {{.}}\n")
 	if err != nil {
 		panic(err)
