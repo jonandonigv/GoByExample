@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 )
 
 type response1 struct {
@@ -49,5 +50,31 @@ func main() {
 		Fruits: []string{"apple", "peach", "pear"}}
 	res2B, _ := json.Marshal(res2D)
 	fmt.Println(string(res2B))
+
+	byt := []byte(`{"num":6.13, "strs": ["a", "b", "c"]}`)
+
+	var dat map[string]interface{}
+
+	if err := json.Unmarshal(byt, &dat); err != nil {
+		panic(err)
+	}
+	fmt.Println(dat)
+
+	num := dat["num"].(float64)
+	fmt.Println(num)
+
+	strs := dat["strs"].([]interface{})
+	str1 := strs[0].(string)
+	fmt.Println(str1)
+
+	str := `{"page":1, "fruits": ["apple", "peach"]}`
+	res := response2{}
+	json.Unmarshal([]byte(str), &res)
+	fmt.Println(res)
+	fmt.Println(res.Fruits[0])
+
+	enc := json.NewEncoder(os.Stdout)
+	d := map[string]int{"apple": 1, "letuce": 7}
+	enc.Encode(d)
 
 }
