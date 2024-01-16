@@ -1,6 +1,11 @@
 package main
 
-import "os"
+import (
+	"fmt"
+	"io/fs"
+	"os"
+	"path/filepath"
+)
 
 func check(e error) {
 	if e != nil {
@@ -30,5 +35,25 @@ func main() {
 	createEmptyFile("subdir/parent/child/file4")
 
 	c, err := os.ReadDir("subdir/parent")
+	check(err)
 
+	fmt.Println("Listing subdir/parent/child")
+	for _, entry := range c {
+		fmt.Println(" ", entry.Name(), entry.IsDir())
+	}
+
+	err = os.Chdir("../../..")
+	check(err)
+
+	fmt.Println("Visiting subdir")
+	err = filepath.WalkDir("subdir", visit)
+
+}
+
+func visit(path string, d fs.DirEntry, err error) error {
+	if err != nil {
+		return err
+	}
+	fmt.Println(" ", path, d.IsDir())
+	return nil
 }
