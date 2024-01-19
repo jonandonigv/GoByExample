@@ -7,8 +7,9 @@ import (
 )
 
 func main() {
-
+	// get args
 	argsWithProg := os.Args
+	// only the args
 	argsWithoutProg := os.Args[1:]
 
 	arg := os.Args[3]
